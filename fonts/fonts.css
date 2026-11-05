@@ -1,0 +1,20 @@
+/* 페이퍼로지 글꼴. 이 폴더에 Paperlogy-4Regular.woff2(또는 .ttf/.otf) 같은 파일을 넣으면 쓰입니다.
+   파일이 없으면 브라우저가 자동으로 시스템 고딕을 씁니다. */
+@font-face { font-family: 'Paperlogy'; font-weight: 100; font-style: normal; font-display: swap;
+  src: local('Paperlogy Thin'), local('Paperlogy-1Thin'), url('Paperlogy-1Thin.woff2') format('woff2'), url('Paperlogy-1Thin.woff') format('woff'), url('Paperlogy-1Thin.ttf') format('truetype'), url('Paperlogy-1Thin.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 200; font-style: normal; font-display: swap;
+  src: local('Paperlogy ExtraLight'), local('Paperlogy-2ExtraLight'), url('Paperlogy-2ExtraLight.woff2') format('woff2'), url('Paperlogy-2ExtraLight.woff') format('woff'), url('Paperlogy-2ExtraLight.ttf') format('truetype'), url('Paperlogy-2ExtraLight.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 300; font-style: normal; font-display: swap;
+  src: local('Paperlogy Light'), local('Paperlogy-3Light'), url('Paperlogy-3Light.woff2') format('woff2'), url('Paperlogy-3Light.woff') format('woff'), url('Paperlogy-3Light.ttf') format('truetype'), url('Paperlogy-3Light.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 400; font-style: normal; font-display: swap;
+  src: local('Paperlogy Regular'), local('Paperlogy-4Regular'), url('Paperlogy-4Regular.woff2') format('woff2'), url('Paperlogy-4Regular.woff') format('woff'), url('Paperlogy-4Regular.ttf') format('truetype'), url('Paperlogy-4Regular.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 500; font-style: normal; font-display: swap;
+  src: local('Paperlogy Medium'), local('Paperlogy-5Medium'), url('Paperlogy-5Medium.woff2') format('woff2'), url('Paperlogy-5Medium.woff') format('woff'), url('Paperlogy-5Medium.ttf') format('truetype'), url('Paperlogy-5Medium.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 600; font-style: normal; font-display: swap;
+  src: local('Paperlogy SemiBold'), local('Paperlogy-6SemiBold'), url('Paperlogy-6SemiBold.woff2') format('woff2'), url('Paperlogy-6SemiBold.woff') format('woff'), url('Paperlogy-6SemiBold.ttf') format('truetype'), url('Paperlogy-6SemiBold.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 700; font-style: normal; font-display: swap;
+  src: local('Paperlogy Bold'), local('Paperlogy-7Bold'), url('Paperlogy-7Bold.woff2') format('woff2'), url('Paperlogy-7Bold.woff') format('woff'), url('Paperlogy-7Bold.ttf') format('truetype'), url('Paperlogy-7Bold.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 800; font-style: normal; font-display: swap;
+  src: local('Paperlogy ExtraBold'), local('Paperlogy-8ExtraBold'), url('Paperlogy-8ExtraBold.woff2') format('woff2'), url('Paperlogy-8ExtraBold.woff') format('woff'), url('Paperlogy-8ExtraBold.ttf') format('truetype'), url('Paperlogy-8ExtraBold.otf') format('opentype'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 900; font-style: normal; font-display: swap;
+  src: local('Paperlogy Black'), local('Paperlogy-9Black'), url('Paperlogy-9Black.woff2') format('woff2'), url('Paperlogy-9Black.woff') format('woff'), url('Paperlogy-9Black.ttf') format('truetype'), url('Paperlogy-9Black.otf') format('opentype'); }
