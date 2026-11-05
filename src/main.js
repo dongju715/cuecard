@@ -39,3 +39,12 @@ render();
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
+
+// 시작 화면: 애니메이션이 끝나면 치웁니다. 화면을 누르면 바로 넘어갑니다.
+const splash = document.getElementById('splash');
+if (splash) {
+  const done = () => splash.remove();
+  splash.addEventListener('animationend', (e) => { if (e.target === splash) done(); });
+  splash.addEventListener('pointerdown', done, { once: true });
+  setTimeout(done, 4000);
+}
