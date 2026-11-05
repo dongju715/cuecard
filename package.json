@@ -1,0 +1,20 @@
+{
+  "name": "cuecard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "postinstall": "node scripts/copy-assets.mjs"
+  },
+  "devDependencies": {
+    "vite": "^6.4.5"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "mammoth": "^1.13.0",
+    "pdfjs-dist": "^4.10.38"
+  }
+}
