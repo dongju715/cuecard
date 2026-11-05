@@ -1,8 +1,20 @@
 // 보관함(첫 화면): 원고 목록, 검색, 용도별 거르기, 이름 변경·복제·내보내기·삭제
 import { h, sheet, toast, confirmSheet, promptSheet, fmtDate } from '../core/ui.js';
 import { listManuscripts, saveManuscript, deleteManuscript, uid } from '../core/storage.js';
-import { exportOne } from '../core/backup.js';
+import { exportOne, newManuscript } from '../core/backup.js';
 import { PURPOSES, purposeLabel } from '../data/presets.js';
+import { logoMark } from '../core/logo.js';
+import { getSettings } from '../core/settings.js';
+
+const GREET = { sermon: '오늘도 좋은 말씀 되세요.', lecture: '오늘 강의도 잘 풀리길 바랍니다.', present: '자신 있게, 차분하게 발표하세요.', speech: '마음이 잘 전해지길 바랍니다.', reading: '천천히, 또렷하게 읽어 보세요.' };
+const DAY = 86400000;
+// 저장된 읽던 위치로 몇 번째 카드인지 셈 (자동 이어짐 카드는 한 묶음)
+function progressOf(m) {
+  const n = m.cards.length || 1;
+  const i = m.cards.findIndex((c) => c.id === m.position?.cardId);
+  return { at: i < 0 ? 0 : i + 1, n, ratio: i < 0 ? 0 : (i + 1) / n };
+}
+const ago = (t) => { const d = Math.floor((Date.now() - t) / DAY); return d <= 0 ? '오늘' : d === 1 ? '어제' : d < 7 ? `${d}일 전` : fmtDate(t); };
 
 const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 
@@ -25,16 +37,21 @@ export default async function library(root) {
     const items = all.filter((m) => (filter === 'all' || m.purpose === filter) && (!q || m.title.toLowerCase().includes(q.toLowerCase())));
     listEl.innerHTML = '';
     if (!all.length) {
-      listEl.append(h('div', { class: 'empty-state' }, h('div', { class: 'big-icon' }), h('p', {}, '아직 원고가 없습니다.'), h('p', { class: 'small' }, '아래 “원고 가져오기”로 hwpx·docx·pdf·txt 파일이나 복사한 글을 넣어 보세요.')));
+      listEl.append(h('div', { class: 'empty-state' }, h('div', { class: 'big-icon' }), h('p', {}, '아직 원고가 없습니다.'), h('p', { class: 'small' }, '위의 “파일 가져오기”나 “붙여넣기”로 hwpx·docx·pdf·txt 파일이나 복사한 글을 넣어 보세요.')));
       return;
     }
     if (!items.length) { listEl.append(h('p', { class: 'muted', style: { textAlign: 'center', padding: '24px' } }, '찾는 원고가 없습니다.')); return; }
-    listEl.append(h('div', { class: 'card-list' }, items.map((m) => h('div', { class: 'item' },
-      h('button', { class: 'main', onclick: () => { location.hash = `#/read/${m.id}`; } },
-        h('div', { class: 'title' }, m.title),
-        h('div', { class: 'meta' }, `${purposeLabel(m.purpose)} · 카드 ${m.cards.length}장 · ${m.lastOpened ? '마지막으로 연 날 ' + fmtDate(m.lastOpened) : '아직 열지 않음'}`)),
-      h('button', { class: 'btn small', onclick: () => { location.hash = `#/edit/${m.id}`; } }, '편집'),
-      h('button', { class: 'icon-btn', 'aria-label': '더 보기', onclick: () => more(m) }, '⋯')))));
+    listEl.append(h('div', { class: 'doc-grid' }, items.map((m) => {
+      const p = progressOf(m);
+      return h('div', { class: 'doc' },
+        h('button', { class: 'doc-main', onclick: () => { location.hash = `#/read/${m.id}`; } },
+          h('div', { class: 'doc-title' }, m.title),
+          h('div', { class: 'doc-meta' }, `${purposeLabel(m.purpose)} · ${m.cards.length}장 · ${m.lastOpened ? ago(m.lastOpened) : '새 원고'}`),
+          h('div', { class: 'bar' }, h('i', { style: { width: `${Math.round(p.ratio * 100)}%` } }))),
+        h('div', { class: 'doc-actions' },
+          h('button', { class: 'btn small', onclick: () => { location.hash = `#/edit/${m.id}`; } }, '편집'),
+          h('button', { class: 'icon-btn', 'aria-label': '더 보기', onclick: () => more(m) }, '⋯')));
+    })));
   }
 
   function more(m) {
@@ -58,13 +75,46 @@ export default async function library(root) {
       } }, '삭제')));
   }
 
+  const st = getSettings();
+  const recent = all.filter((m) => m.lastOpened).sort((a, b) => b.lastOpened - a.lastOpened)[0];
+  const week = all.filter((m) => m.lastOpened && Date.now() - m.lastOpened < 7 * DAY).length;
+  const totalCards = all.reduce((n, m) => n + m.cards.length, 0);
+
+  async function newBlank() {
+    const m = newManuscript([], '새 원고');
+    m.cards = [{ id: uid(), runs: [{ t: '' }], note: '', cont: false }];
+    if (await saveManuscript(m)) location.hash = `#/edit/${m.id}`;
+  }
+
+  let hero = null;
+  if (recent) {
+    const p = progressOf(recent);
+    hero = h('button', { class: 'hero', onclick: () => { location.hash = `#/read/${recent.id}`; } },
+      h('div', { class: 'hero-eyebrow' }, `이어서 읽기 · ${ago(recent.lastOpened)}`),
+      h('div', { class: 'hero-title' }, recent.title),
+      h('div', { class: 'bar' }, h('i', { style: { width: `${Math.round(p.ratio * 100)}%` } })),
+      h('div', { class: 'hero-foot' }, h('span', {}, `${p.at} / ${p.n}장`), h('span', { class: 'hero-go' }, '▶ 이어서 읽기')));
+  }
+  const tile = (icon, label, run) => h('button', { class: 'tile', onclick: run }, h('span', { class: 'tile-ic', 'aria-hidden': 'true' }, icon), label);
+  const stat = (label, v) => h('div', { class: 'stat' }, h('span', { class: 'muted small' }, label), h('b', {}, v));
+
   root.append(h('div', { class: 'screen library' },
-    h('header', { class: 'topbar' }, h('h1', {}, '큐카드'), h('button', { class: 'btn small', onclick: () => { location.hash = '#/settings'; } }, '설정')),
+    h('header', { class: 'topbar brand' },
+      h('div', { class: 'brand-mark', html: logoMark({ size: 32 }) }),
+      h('h1', {}, '큐카드'),
+      h('button', { class: 'btn small', onclick: () => { location.hash = '#/settings'; } }, '설정')),
     h('main', {},
+      h('p', { class: 'greet' }, GREET[st.purpose] || '오늘도 잘 전하시길 바랍니다.'),
       !isStandalone() ? h('button', { class: 'notice warn', style: { width: '100%', textAlign: 'left', border: 0 }, onclick: () => installGuide() }, '홈 화면에 추가해서 쓰면 전체 화면으로 열리고, 오래 쓰지 않아도 저장한 원고가 지워질 위험이 줄어듭니다. 방법 보기 ›') : null,
-      search, chips, listEl,
-      h('div', { class: 'credit' }, 'LIGHTUP MEDIA.')),
-    h('footer', { class: 'bottom-bar' }, h('button', { class: 'btn primary big', onclick: () => { location.hash = '#/import'; } }, '＋ 원고 가져오기'))));
+      hero,
+      h('div', { class: 'tiles' },
+        tile('⇪', '파일 가져오기', () => { location.hash = '#/import'; }),
+        tile('⎘', '붙여넣기', () => { location.hash = '#/import'; }),
+        tile('✎', '새로 쓰기', newBlank)),
+      all.length ? h('div', { class: 'stats' }, stat('원고', `${all.length}`), stat('전체 카드', `${totalCards}`), stat('이번 주 읽음', `${week}개`)) : null,
+      h('div', { class: 'section-head' }, h('h2', {}, '원고'), search),
+      chips, listEl,
+      h('div', { class: 'credit' }, 'LIGHTUP MEDIA.'))));
   drawChips(); draw();
 }
 
