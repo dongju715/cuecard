@@ -25,7 +25,7 @@ const safe = (s) => s.replace(/[\\/:*?"<>|\s]+/g, '_').slice(0, 40);
 
 export async function exportBackup() {
   const data = { app: 'cuecard', kind: 'backup', schema: DATA_VERSION, exportedAt: new Date().toISOString(), settings: getSettings(), manuscripts: await listManuscripts() };
-  download(`큐카드-백업-${stamp()}.json`, JSON.stringify(data));
+  download(`큐잇-백업-${stamp()}.json`, JSON.stringify(data));
 }
 
 export async function exportOne(id) {
@@ -37,7 +37,7 @@ export async function exportOne(id) {
 
 // mode: 'merge'(합치기) | 'replace'(덮어쓰기)
 export async function importJSON(data, mode = 'merge') {
-  if (!data || data.app !== 'cuecard') throw new Error('큐카드 백업 파일이 아닙니다.');
+  if (!data || data.app !== 'cuecard') throw new Error('큐잇 백업 파일이 아닙니다.');
   if (data.kind === 'manuscript') {
     const m = migrateManuscript({ ...data.manuscript, id: uid(), lastOpened: null });
     await saveManuscript(m);

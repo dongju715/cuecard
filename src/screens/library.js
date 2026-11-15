@@ -101,7 +101,7 @@ export default async function library(root) {
   root.append(h('div', { class: 'screen library' },
     h('header', { class: 'topbar brand' },
       h('div', { class: 'brand-mark', html: logoMark({ size: 32 }) }),
-      h('h1', {}, '큐카드'),
+      h('h1', {}, '큐잇'),
       h('button', { class: 'btn small', onclick: () => { location.hash = '#/settings'; } }, '설정')),
     h('main', {},
       h('p', { class: 'greet' }, GREET[st.purpose] || '오늘도 잘 전하시길 바랍니다.'),
@@ -121,7 +121,7 @@ export default async function library(root) {
 export function installGuide() {
   sheet('홈 화면에 추가하기', h('div', {},
     h('h3', {}, 'iPad · Safari'),
-    h('ol', { class: 'steps' }, h('li', {}, '주소창 옆의 공유 버튼(□↑)을 누릅니다.'), h('li', {}, '“홈 화면에 추가”를 고릅니다.'), h('li', {}, '이름을 “큐카드”로 두고 “추가”를 누릅니다.'), h('li', {}, '이제 홈 화면의 큐카드 아이콘으로 엽니다.')),
+    h('ol', { class: 'steps' }, h('li', {}, '주소창 옆의 공유 버튼(□↑)을 누릅니다.'), h('li', {}, '“홈 화면에 추가”를 고릅니다.'), h('li', {}, '이름을 “큐잇”로 두고 “추가”를 누릅니다.'), h('li', {}, '이제 홈 화면의 큐잇 아이콘으로 엽니다.')),
     h('h3', {}, 'Galaxy Tab · Chrome'),
     h('ol', { class: 'steps' }, h('li', {}, '오른쪽 위 ⋮ 메뉴를 누릅니다.'), h('li', {}, '“홈 화면에 추가” 또는 “앱 설치”를 고릅니다.'), h('li', {}, '“설치”를 누르면 홈 화면에 아이콘이 생깁니다.')),
     h('p', { class: 'notice' }, 'Safari는 오래 쓰지 않은 웹사이트의 저장 데이터를 지울 수 있습니다. 홈 화면에 추가해 두고, 설정 → 백업 내보내기로 가끔 백업 파일을 만들어 두세요.')));

@@ -1,7 +1,7 @@
 {
-  "name": "큐카드",
-  "short_name": "큐카드",
-  "description": "손에 들고 읽는 말하기 큐카드",
+  "name": "큐잇",
+  "short_name": "큐잇",
+  "description": "손에 들고 넘기며 읽는 말하기 큐카드",
   "lang": "ko",
   "start_url": "./",
   "scope": "./",

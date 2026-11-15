@@ -1,4 +1,4 @@
-/* 큐카드 스타일. 굵기·색·크기는 모두 아래 변수 한곳에서 관리합니다. */
+/* 큐잇 스타일. 굵기·색·크기는 모두 아래 변수 한곳에서 관리합니다. */
 :root {
   --font-ui: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
   --font-card: 'Paperlogy', var(--font-ui);

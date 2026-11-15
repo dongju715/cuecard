@@ -95,7 +95,7 @@ export default function settings(root, arg) {
           h('button', { class: 'set-row', style: { width: '100%', border: 0, background: 'transparent', textAlign: 'left' }, onclick: async () => {
             if (await confirmSheet('설정 초기화', '모든 설정을 처음 값으로 되돌리고 시작 설정을 다시 합니다. 원고는 남습니다.', '초기화')) { resetSettings(); location.hash = '#/setup'; }
           } }, h('span', { class: 'lbl', style: { color: 'var(--danger)' } }, '설정 초기화'))),
-        h('p', { class: 'muted small', style: { textAlign: 'center', marginTop: '24px' } }, '큐카드는 서버 없이 이 기기 안에서만 동작합니다. 원고는 어디로도 전송되지 않습니다.'),
+        h('p', { class: 'muted small', style: { textAlign: 'center', marginTop: '24px' } }, '큐잇는 서버 없이 이 기기 안에서만 동작합니다. 원고는 어디로도 전송되지 않습니다.'),
         h('div', { class: 'credit' }, 'LIGHTUP MEDIA.'))));
     window.scrollTo(0, scroll);
   };

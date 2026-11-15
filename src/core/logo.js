@@ -1,4 +1,4 @@
-// 큐카드 로고 (C1: 넘길 다음 장 + 큐 마크). 외부 파일 없이 SVG 문자열로 씁니다.
+// 큐잇 로고 (C1: 넘길 다음 장 + 큐 마크). 외부 파일 없이 SVG 문자열로 씁니다.
 export const LOGO_ORANGE = '#F26135';
 export const LOGO_INK = '#0E0E0E';
 export const LOGO_PAPER = '#F4EFE6';
