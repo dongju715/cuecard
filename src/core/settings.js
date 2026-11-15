@@ -74,5 +74,8 @@ export function applySettings() {
   }
   const dark = s.theme === 'dark' || (s.theme === 'auto' && mql.matches);
   root.dataset.theme = dark ? 'dark' : 'light';
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0b0b0c' : '#f6f4ef');
+  const tc = dark ? '#0b0b0c' : '#f6f4ef';
+  document.documentElement.dataset.themeColor = tc;
+  // 시작 화면이 떠 있는 동안에는 위아래까지 검정으로 둡니다.
+  if (!document.documentElement.classList.contains('splashing')) document.querySelector('meta[name="theme-color"]')?.setAttribute('content', tc);
 }

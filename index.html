@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" class="splashing">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#f6f4ef" />
+  <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -34,7 +34,9 @@
     </div>
   </div>
   <style>
-    #splash { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; align-items: center; justify-content: center;
+    html.splashing, html.splashing body { background: #000 !important; overflow: hidden; overscroll-behavior: none; }
+    html.splashing #app { visibility: hidden; }
+    #splash { position: fixed; top: 0; left: 0; right: 0; height: 100vh; height: 100lvh; min-height: 100%; z-index: 9999; background: #000; display: flex; align-items: center; justify-content: center;
       animation: sp-out .45s ease 2.5s forwards; }
     #splash.gone { display: none; }
     .sp-mark { opacity: 0; transform: scale(.94); animation: sp-in .6s cubic-bezier(.2,.8,.2,1) .15s forwards; overflow: visible; }
