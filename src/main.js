@@ -25,7 +25,19 @@ async function render() {
   let [name, arg] = location.hash.replace(/^#\/?/, '').split('/');
   if (!isSetUp() && name !== 'setup') name = 'setup';
   if (!routes[name]) name = 'home';
-  const mod = await routes[name]();
+  let mod;
+  try {
+    mod = await routes[name]();
+    sessionStorage.removeItem('cq-retry');
+  } catch (err) {
+    // 화면 파일을 못 불러오면(예전 버전이 남은 경우) 한 번 새로 고칩니다.
+    if (!sessionStorage.getItem('cq-retry')) { sessionStorage.setItem('cq-retry', '1'); location.reload(); return; }
+    document.getElementById('splash')?.remove();
+    app.innerHTML = '<div style="padding:40px 24px;text-align:center;font-size:17px;line-height:1.6">화면을 불러오지 못했습니다.<br>인터넷에 연결한 뒤 앱을 닫았다가 다시 열어 주세요.</div>';
+    const b = document.createElement('button'); b.className = 'btn primary big'; b.textContent = '다시 열기'; b.onclick = () => location.reload();
+    app.firstChild.append(document.createElement('br'), b);
+    return;
+  }
   if (cleanup) { try { cleanup(); } catch { /* 무시 */ } cleanup = null; }
   app.innerHTML = '';
   document.body.dataset.screen = name;
