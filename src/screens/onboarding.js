@@ -18,7 +18,7 @@ export default function onboarding(root) {
   const prev = getSettings();
   const d = { ...prev, purpose: prev.purpose || null, device: prev.device || null };
   let step = 0;
-  let welcome = !prev.setupDone; // 처음 여는 사람에게만 환영 화면
+  let welcome = true; // 시작 설정은 언제나 환영 화면부터
   const STEPS = 5;
 
   const sample = () => SAMPLES[d.purpose] || SAMPLE;
@@ -149,7 +149,7 @@ export default function onboarding(root) {
     root.innerHTML = '';
     root.append(h('div', { class: 'screen onboarding' },
       h('header', { class: 'ob-top' },
-        h('button', { class: 'btn ghost', disabled: (step === 0 && prev.setupDone) || null, onclick: () => { if (step === 0) welcome = true; else step--; draw(); } }, '‹ 이전'),
+        h('button', { class: 'btn ghost', onclick: () => { if (step === 0) welcome = true; else step--; draw(); } }, '‹ 이전'),
         h('div', { class: 'dots', 'aria-label': `${Math.min(step + 1, STEPS)} / ${STEPS} 단계` },
           Array.from({ length: STEPS }, (_, i) => h('span', { class: 'dot' + (i < step ? ' done' : i === step ? ' on' : '') }))),
         h('span', { class: 'ob-spacer' })),

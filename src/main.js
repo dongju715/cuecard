@@ -37,7 +37,14 @@ window.addEventListener('hashchange', render);
 render();
 
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
-  navigator.serviceWorker.register('./sw.js').catch(() => {});
+  // 새 버전을 받으면 한 번만 다시 열어서 바로 반영합니다(예전 화면이 남지 않도록).
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadController || reloaded) return;
+    reloaded = true; location.reload();
+  });
+  navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then((r) => r.update()).catch(() => {});
 }
 
 // 시작 화면: 애니메이션이 끝나면 치웁니다. 화면을 누르면 바로 넘어갑니다.
