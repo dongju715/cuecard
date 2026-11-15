@@ -3,6 +3,7 @@ import { h } from '../core/ui.js';
 import { PURPOSES, presetFor, FONTS, WEIGHTS, WEIGHT_SCALE, SAMPLE, purposeLabel } from '../data/presets.js';
 import { DEVICES, measureThisDevice } from '../data/devices.js';
 import { getSettings, saveSettings } from '../core/settings.js';
+import { logoMark } from '../core/logo.js';
 
 const SAMPLES = {
   sermon: SAMPLE,
@@ -17,6 +18,7 @@ export default function onboarding(root) {
   const prev = getSettings();
   const d = { ...prev, purpose: prev.purpose || null, device: prev.device || null };
   let step = 0;
+  let welcome = !prev.setupDone; // 처음 여는 사람에게만 환영 화면
   const STEPS = 5;
 
   const sample = () => SAMPLES[d.purpose] || SAMPLE;
@@ -121,13 +123,33 @@ export default function onboarding(root) {
     ];
   }
 
+  function drawWelcome() {
+    root.innerHTML = '';
+    const point = (t, d2) => h('li', {}, h('strong', {}, t), h('span', { class: 'muted small' }, d2));
+    root.append(h('div', { class: 'screen onboarding welcome' },
+      h('main', { class: 'ob-body welcome-body' },
+        h('div', { class: 'welcome-mark', html: logoMark({ size: 104 }) }),
+        h('p', { class: 'welcome-eyebrow' }, '반갑습니다'),
+        h('h1', {}, '큐잇에 오신 것을 환영합니다'),
+        h('p', { class: 'welcome-lead' }, '단상 위에서도 흔들리지 않도록, 원고를 손에 쥐기 좋은 카드로 바꿔 드립니다.'),
+        h('ul', { class: 'welcome-points' },
+          point('원고를 넣으면 카드로', 'hwpx · docx · pdf · txt 파일이나 복사한 글을 화면에 맞게 나눕니다.'),
+          point('탭 한 번에 다음 장', '말하는 흐름을 끊지 않고 조용히 넘깁니다.'),
+          point('원고는 이 기기에만', '인터넷으로 보내지 않고, 오프라인에서도 열립니다.')),
+        h('p', { class: 'muted small' }, '쓰실 용도와 기기를 몇 가지만 여쭤볼게요. 1분이면 끝납니다.')),
+      h('footer', { class: 'bottom-bar' },
+        h('button', { class: 'btn primary big', onclick: () => { welcome = false; draw(); } }, '시작하기')),
+      h('div', { class: 'credit' }, 'LIGHTUP MEDIA.')));
+  }
+
   function draw() {
+    if (welcome) return drawWelcome();
     const views = [stepPurpose, stepDevice, stepFont, stepWeight, stepTheme, summary];
     const canNext = [d.purpose, d.device, d.font, d.weight != null, d.theme][step];
     root.innerHTML = '';
     root.append(h('div', { class: 'screen onboarding' },
       h('header', { class: 'ob-top' },
-        h('button', { class: 'btn ghost', disabled: step === 0 || null, onclick: () => { step--; draw(); } }, '‹ 이전'),
+        h('button', { class: 'btn ghost', disabled: (step === 0 && prev.setupDone) || null, onclick: () => { if (step === 0) welcome = true; else step--; draw(); } }, '‹ 이전'),
         h('div', { class: 'dots', 'aria-label': `${Math.min(step + 1, STEPS)} / ${STEPS} 단계` },
           Array.from({ length: STEPS }, (_, i) => h('span', { class: 'dot' + (i < step ? ' done' : i === step ? ' on' : '') }))),
         h('span', { class: 'ob-spacer' })),

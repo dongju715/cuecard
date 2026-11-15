@@ -325,3 +325,18 @@ input[type=range] { width: 46%; min-width: 160px; height: 44px; accent-color: va
 .doc-meta { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
 .doc .bar { height: 4px; }
 .doc-actions { display: flex; justify-content: flex-end; gap: 6px; padding: 0 8px 8px; }
+
+/* ── 환영 화면 ── */
+.welcome-body { display: flex; flex-direction: column; justify-content: center; max-width: 560px; margin: 0 auto; width: 100%; }
+.welcome-mark { margin-bottom: 18px; }
+.welcome-mark .logo-mark { animation: welcome-in .7s cubic-bezier(.2,.8,.2,1) both; }
+.welcome-eyebrow { margin: 0; color: var(--brand); font-weight: var(--w-ui-strong); letter-spacing: .04em; }
+.welcome h1 { font-size: 32px; margin: 4px 0 10px; word-break: keep-all; }
+.welcome-lead { font-size: 18px; line-height: 1.6; color: var(--muted); margin: 0 0 22px; word-break: keep-all; }
+.welcome-points { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 10px; }
+.welcome-points li { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px 14px 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); position: relative; }
+.welcome-points li::before { content: ''; position: absolute; left: 0; top: 16px; bottom: 16px; width: 3px; border-radius: 0 3px 3px 0; background: var(--brand); }
+.welcome .credit { padding-bottom: calc(var(--safe-b) + 8px); }
+@keyframes welcome-in { from { opacity: 0; transform: translateY(8px) scale(.96); } }
+@media (prefers-reduced-motion: reduce) { .welcome-mark .logo-mark { animation: none; } }
+.welcome .btn.primary { background: var(--brand); color: #fff; }
