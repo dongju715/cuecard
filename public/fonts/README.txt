@@ -1,2 +1,3 @@
-여기에 페이퍼로지 글꼴 파일을 넣으세요. (예: Paperlogy-4Regular.ttf, Paperlogy-7Bold.ttf …)
-지원 파일 이름: Paperlogy-1Thin ~ Paperlogy-9Black, 확장자 .woff2 / .woff / .ttf / .otf
+앱에 들어 있는 글꼴 파일입니다.
+- 페이퍼로지(Paperlogy): SIL Open Font License
+- 마루 부리(MaruBuri), 나눔스퀘어라운드(NanumSquareRound): 네이버, SIL Open Font License

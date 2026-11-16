@@ -78,9 +78,9 @@ export default function onboarding(root) {
       h('h1', {}, '글꼴을 고르세요'),
       h('p', { class: 'muted' }, '실제 원고 문장으로 보여드립니다.'),
       h('div', { class: 'choices list' }, FONTS.map((f) => option(d.font === f.id, () => choose({ font: f.id }),
-        h('span', { class: 'muted small' }, f.label + (f.id === 'paperlogy' ? ' · 기본' : '')),
+        h('span', { class: 'muted small' }, f.label + ' · ' + f.desc + (f.id === 'paperlogy' ? ' · 기본' : '')),
         h('span', { class: 'preview-text', style: { fontFamily: f.css, fontWeight: WEIGHT_SCALE[d.weight ?? 1] } }, sample())))),
-      h('p', { class: 'muted small' }, '둥근 글꼴이 기기에 없으면 고딕으로 보입니다. 페이퍼로지 파일이 없으면 시스템 고딕으로 대체됩니다.'),
+      h('p', { class: 'muted small' }, '글꼴은 앱 안에 들어 있어서 인터넷이 없어도 똑같이 보입니다. 굵기는 글꼴마다 조금씩 다를 수 있어요.'),
     ];
   }
 

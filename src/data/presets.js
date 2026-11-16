@@ -39,10 +39,10 @@ export function presetFor(id) {
 export const purposeLabel = (id) => (PURPOSES.find((p) => p.id === id) || {}).label || '기타';
 
 export const FONTS = [
-  { id: 'paperlogy', label: '페이퍼로지', css: "'Paperlogy', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif" },
-  { id: 'gothic',    label: '시스템 고딕', css: "-apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Noto Sans CJK KR', 'Malgun Gothic', system-ui, sans-serif" },
-  { id: 'myeongjo',  label: '시스템 명조', css: "'AppleMyungjo', 'Nanum Myeongjo', 'Noto Serif KR', 'Noto Serif CJK KR', 'Batang', serif" },
-  { id: 'rounded',   label: '시스템 둥근 글꼴', css: "ui-rounded, 'SF Pro Rounded', 'NanumSquareRound', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" },
+  { id: 'paperlogy', label: '페이퍼로지', desc: '고딕 · 또렷하고 깔끔함', css: "'Paperlogy', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif" },
+  { id: 'gothic',    label: '시스템 고딕', desc: '기기 기본 글꼴', css: "-apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Noto Sans CJK KR', 'Malgun Gothic', system-ui, sans-serif" },
+  { id: 'myeongjo',  label: '마루 부리', desc: '명조 · 단정하고 차분함', css: "'MaruBuri', 'AppleMyungjo', 'Noto Serif KR', 'Batang', serif" },
+  { id: 'rounded',   label: '나눔스퀘어라운드', desc: '둥근 글꼴 · 부드럽고 친근함', css: "'NanumSquareRound', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" },
 ];
 
 // 굵기 단계. 본문=사용자 선택, 강조=본문보다 두 단계 굵게, 번호·진행=가장 가늘게
