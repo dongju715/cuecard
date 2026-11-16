@@ -1,0 +1,20 @@
+/* 앱에 함께 들어 있는 글꼴. 모두 이 폴더의 파일만 씁니다(외부 주소 없음).
+   페이퍼로지(OFL), 마루 부리·나눔스퀘어라운드(네이버, OFL). */
+@font-face { font-family: 'Paperlogy'; font-weight: 100; font-style: normal; font-display: swap; src: url('Paperlogy-1Thin.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 200; font-style: normal; font-display: swap; src: url('Paperlogy-2ExtraLight.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 300; font-style: normal; font-display: swap; src: url('Paperlogy-3Light.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 400; font-style: normal; font-display: swap; src: url('Paperlogy-4Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 500; font-style: normal; font-display: swap; src: url('Paperlogy-5Medium.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 600; font-style: normal; font-display: swap; src: url('Paperlogy-6SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 700; font-style: normal; font-display: swap; src: url('Paperlogy-7Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 800; font-style: normal; font-display: swap; src: url('Paperlogy-8ExtraBold.woff2') format('woff2'); }
+@font-face { font-family: 'Paperlogy'; font-weight: 900; font-style: normal; font-display: swap; src: url('Paperlogy-9Black.woff2') format('woff2'); }
+@font-face { font-family: 'MaruBuri'; font-weight: 200; font-style: normal; font-display: swap; src: url('MaruBuri-ExtraLight.woff2') format('woff2'); }
+@font-face { font-family: 'MaruBuri'; font-weight: 300; font-style: normal; font-display: swap; src: url('MaruBuri-Light.woff2') format('woff2'); }
+@font-face { font-family: 'MaruBuri'; font-weight: 400; font-style: normal; font-display: swap; src: url('MaruBuri-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'MaruBuri'; font-weight: 600; font-style: normal; font-display: swap; src: url('MaruBuri-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'MaruBuri'; font-weight: 700; font-style: normal; font-display: swap; src: url('MaruBuri-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'NanumSquareRound'; font-weight: 300; font-style: normal; font-display: swap; src: url('NanumSquareRoundL.woff2') format('woff2'); }
+@font-face { font-family: 'NanumSquareRound'; font-weight: 400; font-style: normal; font-display: swap; src: url('NanumSquareRoundR.woff2') format('woff2'); }
+@font-face { font-family: 'NanumSquareRound'; font-weight: 700; font-style: normal; font-display: swap; src: url('NanumSquareRoundB.woff2') format('woff2'); }
+@font-face { font-family: 'NanumSquareRound'; font-weight: 800; font-style: normal; font-display: swap; src: url('NanumSquareRoundEB.woff2') format('woff2'); }
